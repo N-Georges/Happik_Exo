@@ -1,0 +1,11 @@
+SET check_function_bodies = false;
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (1, 'youtube', 86798769767, 100, 3);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (2, 'amazon',  0083498787, 60, 2);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (3, 'mediamarkt', 34646346587, 92, 6);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (4, 'carrefour', 7676523423423487, 14, 1);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (5, 'adidas', 23423656587, 40, 4);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (6, 'flyagence', 457876587, 5500, 9);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (7, 'fnac', 686326587, 300, 10);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (8, 'ikea', 99756587, 1400, 3);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (9, 'total', 2532876587, 120, 7);
+INSERT INTO public.transactions (id, name, account_number, amount, user_id) VALUES (10, 'pizzanona', 467667876587, 44, 8);

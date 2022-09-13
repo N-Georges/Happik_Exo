@@ -1,0 +1,33 @@
+overwrite: true
+generates:
+    src/graphql-generated/apollo-hooks.tsx:
+        schema:
+            - http://localhost:8000/v1/graphql:
+                  headers:
+                      x-hasura-admin-secret: MyReallySuperSecret
+        documents:
+            - ./src/graphql/*.graphql
+        config:
+            withMutationFn: false
+            preResolveTypes: true
+            namingConvention:
+                transformUnderscore: true
+                typeNames: change-case#pascalCase
+                enumValues: change-case#pascalCase
+            strictScalars: true
+            scalars:
+                jsonb: any
+                uuid: string
+                date: string
+                time: string
+                bigint: bigint
+                timestamptz: string
+                timestamp: string
+                timetz: string
+            declarationKind:
+                type: interface
+                input: interface
+        plugins:
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-react-apollo'

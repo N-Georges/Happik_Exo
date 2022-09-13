@@ -1,0 +1,11 @@
+SET check_function_bodies = false;
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (1, 'georges', 'nodari', 'nodari-g@gmail.com', '2022-09-07 21:24:59.578889+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (2, 'elon', 'musk', 'musk-e@gmail.com', '2022-09-07 21:25:36.24307+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (3, 'bill', 'gates', 'gates-b@gmail.com', '2022-09-07 21:25:56.432707+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (4, 'all', 'capone', 'capone-a@gmail.com', '2022-09-07 22:56:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (5, 'thomas', 'shelby', 'shelby-t@gmail.com', '2022-09-08 13:56:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (6, 'winston', 'churchill', 'churchill-w@gmail.com', '2022-09-08 14:56:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (7, 'cohen', 'jonathan', 'cohen-j@gmail.com', '2022-09-12 11:56:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (8, 'mcgregor', 'conor', 'mcgregor-c@gmail.com', '2022-09-12 12:00:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (9, 'doe', 'john', 'doe-j@gmail.com', '2022-09-12 13:00:56.735264+00');
+INSERT INTO public.users (id, first_name, last_name, email, created_at) VALUES (10, 'kobe', 'bryant', 'kobe-b@gmail.com', '2022-09-13 11:00:56.735264+00');

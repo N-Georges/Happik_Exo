@@ -1,0 +1,72 @@
+query getTransactions($offset: Int, $limit: Int) {
+    transactions(offset: $offset, limit: $limit) {
+        id
+        name
+        account_number
+        amount
+        user {
+            id
+            first_name
+            last_name
+            email
+        }
+    }
+}
+query getTransactionsById($id: Int!) {
+    transactions(where: { id: { _eq: $id } }) {
+        account_number
+        amount
+        name
+        id
+        user {
+            id
+            first_name
+            last_name
+            email
+        }
+    }
+}
+
+mutation deleteTransactions($id: Int!) {
+    delete_transactions(where: { id: { _eq: $id } }) {
+        affected_rows
+    }
+}
+
+mutation updateTransactions(
+    $id: Int!
+    $name: String
+    $account_number: bigint
+    $amount: Int
+) {
+    update_transactions(
+        where: { id: { _eq: $id } }
+        _set: { name: $name, account_number: $account_number, amount: $amount }
+    ) {
+        returning {
+            id
+            name
+            account_number
+            amount
+            user_id
+        }
+    }
+}
+
+mutation addTransaction($name: String, $account_number: bigint, $amount: Int, $user_id: Int) {
+    insert_transactions(
+        objects: {
+            name: $name
+            account_number: $account_number
+            amount: $amount
+            user_id: $user_id
+        }
+    ) {
+        returning {
+            name
+            account_number
+            amount
+            user_id
+        }
+    }
+}

@@ -1,0 +1,39 @@
+query getUsers {
+    users {
+        id
+        first_name
+        last_name
+        email
+        created_at
+    }
+}
+
+mutation deleteUser($id: Int!) {
+    delete_users(where: { id: { _eq: $id } }) {
+        affected_rows
+    }
+}
+
+mutation updateUser($id: Int!, $first_name: String, $last_name: String, $email: String) {
+    update_users(
+        where: { id: { _eq: $id } }
+        _set: { first_name: $first_name, last_name: $last_name, email: $email }
+    ) {
+        returning {
+            first_name
+            last_name
+            email
+        }
+    }
+}
+
+mutation addUser($first_name: String, $last_name: String, $email: String) {
+    insert_users(objects: { first_name: $first_name, last_name: $last_name, email: $email }) {
+        returning {
+            first_name
+            last_name
+            email
+            created_at
+        }
+    }
+}
