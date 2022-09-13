@@ -20,7 +20,7 @@ import {
     Thead,
     Tr,
 } from '@chakra-ui/react';
-import { FiChevronDown, FiChevronUp, FiEdit3 } from 'react-icons/fi';
+import { FiXCircle, FiChevronUp, FiEdit3 } from 'react-icons/fi';
 import { MdAdd } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { RiDeleteBinLine } from 'react-icons/ri';
@@ -30,8 +30,10 @@ import { GetUsersDocument } from 'src/graphql-generated/apollo-hooks';
 import Moment from 'moment';
 import DeleteUser from './DeleteUser';
 import UpdateUser from './UpdateUser';
+import GetUsers from './GetUsers';
 const Transaction = () => {
     const [display, changeDisplay] = useState('hide');
+    const [active, setActive] = useState(false);
     const { loading, error, data } = useQuery(GetUsersDocument);
     if (loading) {
         return <div>Loading...</div>;
@@ -51,72 +53,79 @@ const Transaction = () => {
             <Flex align="center" justifyContent="space-between" mt={8}>
                 <Flex align="flex-end">
                     <Heading as="h2" size="lg" letterSpacing="tight">
-                        Utilisateurs
+                        {active ? 'Mise a jour des utilisateurs' : 'Utitlisateurs'}
                     </Heading>
                 </Flex>
-                <IconButton icon={<HiOutlineAdjustments />} aria-label="calendar" />
+                <IconButton
+                    onClick={() => setActive(!active)}
+                    icon={active ? <FiXCircle /> : <HiOutlineAdjustments />}
+                    aria-label="calendar"
+                />
             </Flex>
-            <Flex flexDir="column">
-                <Flex className="horizontal-scroll" overflow="auto">
-                    <Table variant="unstyled" mt={4}>
-                        <Thead>
-                            <Tr color="gray">
-                                <Th>Nom</Th>
-                                <Th>Prénom</Th>
-                                <Th>Email</Th>
-                                <Th>Créé à</Th>
-                                <Th></Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            {data.users.map(
-                                (item: {
-                                    id: number;
-                                    first_name: string;
-                                    last_name: string;
-                                    email: string;
-                                    created_at: string;
-                                }) => (
-                                    <Tr key={item.id}>
-                                        <Td>
-                                            <Heading size="sm" letterSpacing="tight">
-                                                {item.last_name}
-                                            </Heading>
-                                        </Td>
-                                        <Td>
-                                            <Text>{item.first_name}</Text>
-                                        </Td>
-                                        <Td>{item.email}</Td>
-                                        <Td>{Moment(item.created_at).format('MM/D/YY')}</Td>
-                                        <Td>
-                                            <Flex justifyContent="center">
-                                                <Popover placement="bottom" isLazy>
-                                                    <PopoverTrigger>
-                                                        <IconButton
-                                                            aria-label="More server options"
-                                                            icon={<BsThreeDotsVertical />}
-                                                            variant="solid"
+            {active ? (
+                <GetUsers />
+            ) : (
+                <Flex flexDir="column">
+                    <Flex className="horizontal-scroll" overflow="auto">
+                        <Table variant="unstyled" mt={4}>
+                            <Thead>
+                                <Tr color="gray">
+                                    <Th>Nom</Th>
+                                    <Th>Prénom</Th>
+                                    <Th>Email</Th>
+                                    <Th>Créé à</Th>
+                                    <Th></Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {data.users.map(
+                                    (item: {
+                                        id: number;
+                                        first_name: string;
+                                        last_name: string;
+                                        email: string;
+                                        created_at: string;
+                                    }) => (
+                                        <Tr key={item.id}>
+                                            <Td>
+                                                <Heading size="sm" letterSpacing="tight">
+                                                    {item.last_name}
+                                                </Heading>
+                                            </Td>
+                                            <Td>
+                                                <Text>{item.first_name}</Text>
+                                            </Td>
+                                            <Td>{item.email}</Td>
+                                            <Td>{Moment(item.created_at).format('MM/D/YY')}</Td>
+                                            <Td>
+                                                <Flex justifyContent="center">
+                                                    <Popover placement="bottom" isLazy>
+                                                        <PopoverTrigger>
+                                                            <IconButton
+                                                                aria-label="More server options"
+                                                                icon={<BsThreeDotsVertical />}
+                                                                variant="solid"
+                                                                w="fit-content"
+                                                            />
+                                                        </PopoverTrigger>
+                                                        <PopoverContent
                                                             w="fit-content"
-                                                        />
-                                                    </PopoverTrigger>
-                                                    <PopoverContent
-                                                        w="fit-content"
-                                                        _focus={{ boxShadow: 'none' }}
-                                                    >
-                                                        <PopoverArrow />
-                                                        <PopoverBody>
-                                                            <Stack>
-                                                                <DeleteUser id={item.id} />
-                                                            </Stack>
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Popover>
-                                            </Flex>
-                                        </Td>
-                                    </Tr>
-                                )
-                            )}
-                            {/* {display == 'show' && (
+                                                            _focus={{ boxShadow: 'none' }}
+                                                        >
+                                                            <PopoverArrow />
+                                                            <PopoverBody>
+                                                                <Stack>
+                                                                    <DeleteUser id={item.id} />
+                                                                </Stack>
+                                                            </PopoverBody>
+                                                        </PopoverContent>
+                                                    </Popover>
+                                                </Flex>
+                                            </Td>
+                                        </Tr>
+                                    )
+                                )}
+                                {/* {display == 'show' && (
                                 <>
                                     <Tr>
                                         <Td>
@@ -324,10 +333,10 @@ const Transaction = () => {
                                     </Tr>
                                 </>
                             )} */}
-                        </Tbody>
-                    </Table>
-                </Flex>
-                {/* <Flex align="center">
+                            </Tbody>
+                        </Table>
+                    </Flex>
+                    {/* <Flex align="center">
                     <Divider />
                     <IconButton
                         icon={display == 'show' ? <FiChevronUp /> : <FiChevronDown />}
@@ -342,7 +351,9 @@ const Transaction = () => {
                     />
                     <Divider />
                 </Flex> */}
-            </Flex>
+                </Flex>
+            )}
+            {/* {active && <GetUsers />} */}
         </Flex>
     );
 };

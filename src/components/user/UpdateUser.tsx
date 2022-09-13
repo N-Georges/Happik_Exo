@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { GetUsersDocument, UpdateUserDocument } from 'src/graphql-generated/apollo-hooks';
 
@@ -16,7 +17,7 @@ const UpdateUser: React.FC<CardProps> = ({ id, first_name, last_name, email }) =
     const [updateUser] = useMutation(UpdateUserDocument);
 
     return (
-        <div>
+        <>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -35,24 +36,26 @@ const UpdateUser: React.FC<CardProps> = ({ id, first_name, last_name, email }) =
                     });
                 }}
             >
-                <input
-                    placeholder="firstname"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                />
-                <input
-                    placeholder="lastname"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                />
-                <input
-                    placeholder="email"
-                    value={_email}
-                    onChange={(e) => set_Email(e.target.value)}
-                />
-                <button type="submit">update</button>
+                <Flex gap={2} mb={2} mt={10}>
+                    <Input
+                        placeholder="lastname"
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
+                    />
+                    <Input
+                        placeholder="firstname"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
+                    />
+                    <Input
+                        placeholder="email"
+                        value={_email}
+                        onChange={(e) => set_Email(e.target.value)}
+                    />
+                </Flex>
+                <Button type="submit" w="100%" mb={5}>Update</Button>
             </form>
-        </div>
+        </>
     );
 };
 

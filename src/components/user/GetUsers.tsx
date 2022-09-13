@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import { GetUsersDocument } from 'src/graphql-generated/apollo-hooks';
-import DeleteUser from './DeleteUser';
 import UpdateUser from './UpdateUser';
 
 const GetUsers = () => {
@@ -13,14 +12,10 @@ const GetUsers = () => {
         return <div>Error!</div>;
     }
     return (
-        <div>
+        <>
             {data.users.map(
                 (item: { id: number; first_name: string; last_name: string; email: string }) => (
                     <div key={item.id}>
-                        {/* <h1>{item.first_name}</h1>
-                        <p>{item.last_name}</p>
-                        <p>{item.email}</p> */}
-                        <DeleteUser id={item.id} />
                         <UpdateUser
                             id={item.id}
                             first_name={item.first_name}
@@ -30,7 +25,7 @@ const GetUsers = () => {
                     </div>
                 )
             )}
-        </div>
+        </>
     );
 };
 

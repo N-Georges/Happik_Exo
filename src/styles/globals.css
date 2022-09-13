@@ -50,6 +50,10 @@ a {
     color: #b57295 !important;
 }
 
+.active-user {
+    display: inline-block;
+}
+
 /* vertical scrolbar */
 .vertical-scroll::-webkit-scrollbar {
     width: 2em;

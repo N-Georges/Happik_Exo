@@ -1,9 +1,9 @@
-import GetUsers from 'src/components/user/GetUsers';
+import AlertBuild from 'src/components/AlertBuild';
 
 export default function HomePage() {
     return (
         <>
-            <GetUsers />
+            <AlertBuild />
         </>
     );
 }
